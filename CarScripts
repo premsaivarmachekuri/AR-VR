@@ -1,0 +1,135 @@
+// PlayMovements
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+    public float Speed;
+    public float turnSpeed;
+    public float verticalInput;
+    public float horizontalInput;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        /*Vector3 position = transform.position;
+        //position.z = float(position.z + 0.25);
+        position.z = position.z + 0.1f;
+        transform.position = position;
+        Debug.Log("A new Frame");*/
+        //transform.Translate(0, 0, 0.1f);
+        /*if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+        {
+            transform.Translate(Vector3.forward * Time.deltaTime * Speed);
+        }// Here 10 is speed in km/hr
+        if (Input.GetKey(KeyCode.RightArrow ) || Input.GetKey(KeyCode.D)) { 
+            transform.Translate(Vector3.right * Time.deltaTime * turnSpeed);
+        }
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) { 
+            transform.Translate(Vector3.left * Time.deltaTime * turnSpeed);
+        }
+        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+        {
+            transform.Translate(Vector3.back * Time.deltaTime * Speed);
+        }*/
+        verticalInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxis("Horizontal");
+        transform.Translate(Vector3.forward * Time.deltaTime * Speed * verticalInput);
+        //transform.Translate(Vector3.right * Time.deltaTime * turnSpeed * horizontalInput);
+        transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime * horizontalInput);
+        //transform.Rotate(0f, 2f, 0f);
+
+
+    }
+}
+
+//  CameraScript
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CameraScript : MonoBehaviour
+{
+    public GameObject tank;
+    public Vector3 offset = new Vector3(0, 7, -9);
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void LateUpdate()
+    {
+        transform.position = tank.transform.position + offset;
+    }
+}
+
+
+// Bus 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class bus : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.Translate(Vector3.back * Time.deltaTime * 10);
+    }
+}
+
+// Wheel
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Wheels : MonoBehaviour
+{
+    // Start is called before the first frame update
+    private float verticalInput;
+    private float horizontalInput;
+    private float Speed = 20.0f;
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        /*if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.Rotate(0, -1, 0, Space.World);
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.Rotate(0, 1, 0, Space.World);
+        }
+        if(Input.GetKey(KeyCode.UpArrow)) { 
+            transform.Rotate(1,0,0);
+        }
+        if (Input.GetKey(KeyCode.DownArrow)){
+            transform.Rotate(-1,0,0);
+        }*/  
+        horizontalInput = Input.GetAxis("Horizontal");
+        //transform.Translate(Vector3.forward * Time.deltaTime * Speed * verticalInput);
+        //transform.Translate(Vector3.forward * Time.deltaTime * Speed * verticalInput);
+        //transform.Translate(Vector3.right * Time.deltaTime * turnSpeed * horizontalInput);
+        transform.Rotate(Vector3.up, 10 * Time.deltaTime * horizontalInput);
+    }
+}
+
